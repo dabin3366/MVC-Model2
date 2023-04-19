@@ -1,0 +1,63 @@
+MVC.txt
+
+[  MVC 패턴  ] * 관심사 분리- 각자 자신의 일만 하자 * 
+
+ Model : java파일, 비지니스로직(DAO-디비연결 처리)
+ View : jsp파일, 사용자의 결과페이지, 정보입력 페이지 
+ Controller : Servlet파일(java), model-view 연결 
+ 
+ 클라이언트   => 요청 => C => DB정보 필요 => M => DAO => DB
+ 									|
+ 									V
+ 									
+ * FrontController 패턴
+ 클라이언트   => 요청 => FrontController => DB정보 필요 => Controller => M(DAO) => DB
+ 									|
+ 									V
+ 									
+ 									
+ 									
+   *상대 주소
+          ./member/insertForm.jsp
+          => webapp 폴더
+          ./MemberJoin.me
+          => 프로젝트명
+          
+          
+  * 커넥션풀(Connection pool) : 매번 디비 호출시 마다 디비연결을 수행하는것이 아니라
+                                디비 연결정보를 저장해서 계속해서 사용하는 것
+                                벡터의 형태로 구성된다.
+                                
+  1) service()-doGet(),doPost() 호출시 마다 1개씩 할당
+  2) 커넥션의 개수를 제한
+  3) 커넥션 대여, 사용후 자원 회수 (관리자)
+  
+  요청 -> 할당가능한 커넥션 객체 있는지, 없는지?
+  
+       있을때 : (1) 커넥션 객체 할당 (2) 객체 사용 (3) 객체 반납
+       
+       없을때 : (1) 커넥션 객체가 할당될때까지 대기 (2) 커넥션 객체 임시로 생성(소멸) 
+  
+    <Resource 
+	  name="외부에서 호출되는 해당이름" 
+	  auth="자원관리자(Application/Container)" 
+	  type="리소스를 사용할때 실제로 처리되는 클래스" 
+	  driverClassName="디비드라이버명" 
+	  username="디비아이디" 
+	  password="디비 비밀번호" 
+	  url="디비 주소" 
+	  maxWait="커넥션이 없을때 기다리는 최대 시간 " />
+    
+    
+    
+  패턴1 : DB 사용 X, view 페이지 사용(출력)
+  패턴2 : DB 사용 O(작업 처리), view 페이지 이동
+  패턴3 : DB 사용 O, view 페이지 사용(출력)
+  
+  
+  
+                                   
+ 									
+ 									
+ 									
+ 									
